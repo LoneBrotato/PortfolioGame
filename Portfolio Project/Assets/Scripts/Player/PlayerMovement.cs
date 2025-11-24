@@ -77,14 +77,17 @@ public class PlayerMovement : MonoBehaviour
     public void Interact(InputAction.CallbackContext context)
     {
         List<Collider2D> overlapping = new List<Collider2D>();
-        InteractionCheckCapsule.Overlap(InteractionContactFilter,overlapping);
+        InteractionCheckCapsule.Overlap(overlapping);
 
         if(overlapping.Count>0)
         {
             foreach (Collider2D coll in overlapping)
             {
-                Interactable interactOBJ =coll.gameObject.GetComponent<Interactable>();
-                interactOBJ.Activate();
+                if(coll.CompareTag("Interact"))
+                {
+                    Interactable interactOBJ = coll.gameObject.GetComponent<Interactable>();
+                    interactOBJ.Activate();
+                }
             }
         }
         else
@@ -107,6 +110,7 @@ public class PlayerMovement : MonoBehaviour
         RB = this.GetComponent<Rigidbody2D>();
         InteractionContactFilter.SetLayerMask(IntreractionLayer);
         InteractionContactFilter.useLayerMask = true;
+        
        
     }
     private void OnDestroy()

@@ -76,24 +76,28 @@ public class PlayerMovement : MonoBehaviour
 
     public void Interact(InputAction.CallbackContext context)
     {
-        List<Collider2D> overlapping = new List<Collider2D>();
-        InteractionCheckCapsule.Overlap(overlapping);
-
-        if(overlapping.Count>0)
+        if(context.started)
         {
-            foreach (Collider2D coll in overlapping)
+            List<Collider2D> overlapping = new List<Collider2D>();
+            InteractionCheckCapsule.Overlap(overlapping);
+
+            if (overlapping.Count > 0)
             {
-                if(coll.CompareTag("Interact"))
+                foreach (Collider2D coll in overlapping)
                 {
-                    Interactable interactOBJ = coll.gameObject.GetComponent<Interactable>();
-                    interactOBJ.Activate();
+                    if (coll.CompareTag("Interact"))
+                    {
+                        Interactable interactOBJ = coll.gameObject.GetComponent<Interactable>();
+                        interactOBJ.Activate();
+                    }
                 }
             }
+            else
+            {
+                Debug.Log("Nothing Is there");
+            }
         }
-        else
-        {
-            Debug.Log("Nothing Is there");
-        }
+      
     }
     public void ScoreItems(InputAction.CallbackContext context)
     {

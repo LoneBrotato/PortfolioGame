@@ -21,7 +21,7 @@ public class SmoothFollowCamera : MonoBehaviour
 
     private void Start()
     {
-  
+        
     }
 
 

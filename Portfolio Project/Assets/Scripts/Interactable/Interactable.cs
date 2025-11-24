@@ -20,8 +20,16 @@ public class Interactable : MonoBehaviour
     }
 
 
-    public void Activate( )
+    virtual public void Activate( )
     {
         Debug.Log(gameObject.name+ " Activated!");
+    }
+    private void Start()
+    {
+
+    }
+    private void Update()
+    {
+        
     }
 }

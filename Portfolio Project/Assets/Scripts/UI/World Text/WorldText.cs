@@ -15,7 +15,22 @@ public class WorldText : MonoBehaviour
     [SerializeField] bool TextFade = false;
     [SerializeField] Transform DisplayPoint;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+
+    public bool started = false;
+
+    public void SetValue(float floatSpeed, float lifetime, bool textfloat, bool textFade, Transform displaypoint)
+    {
+        HideText(true);
+        this.lifeTime = lifetime;
+        TextFloatSpeed = floatSpeed;
+        TextFloat = textfloat;
+        TextFade = textFade;
+        DisplayPoint = displaypoint;
+
+        this.transform.position=displaypoint.transform.position;
+
+    }
+    public void WordStart()
     {
         if(TextFloat)
         {
@@ -25,16 +40,23 @@ public class WorldText : MonoBehaviour
         {
             StartCoroutine(FadeOut());
         }
-       
+        started = true;
+        HideText(false);
+
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(TextFloat)
+        if (started)
         {
-            MoveText();
+            if (TextFloat)
+            {
+                MoveText();
+            }
         }
+       
     }
 
     public void MoveText()
@@ -60,4 +82,18 @@ public class WorldText : MonoBehaviour
         Destroy(gameObject);
     }
 
+    public void SetText(string NewText)
+    {
+        Text.text = NewText;
+    }
+
+    public void HideText(bool hide)
+    {
+       Text.gameObject.SetActive(!hide);
+    }
+
+    public void HideTexttoggle()
+    {
+        Text.gameObject.SetActive(!Text.gameObject.activeInHierarchy);
+    }
 }

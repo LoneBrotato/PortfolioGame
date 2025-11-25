@@ -32,7 +32,8 @@ public class WorldText : MonoBehaviour
     }
     public void WordStart()
     {
-        if(TextFloat)
+        HideText(false);
+        if (TextFloat)
         {
             TextFade = true;
         }
@@ -41,7 +42,7 @@ public class WorldText : MonoBehaviour
             StartCoroutine(FadeOut());
         }
         started = true;
-        HideText(false);
+      
 
 
     }
